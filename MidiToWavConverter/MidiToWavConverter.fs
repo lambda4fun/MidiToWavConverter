@@ -105,13 +105,9 @@ type MainForm () as this =
             None
 
     let padFileToAlignment (alignment : int64) (filePath : string) =
-        let ceil n = n + (alignment - n % alignment)
-        let fileInfo = FileInfo filePath
-        fileInfo.Refresh ()
-        let newFileSize = ceil fileInfo.Length
-        let padSize = newFileSize - fileInfo.Length
-        let pad = Array.zeroCreate ^ int padSize
         use file = File.Open (filePath, FileMode.Append)
+        let padSize = (alignment - file.Length % alignment)
+        let pad = Array.zeroCreate ^ int padSize
         file.Write (pad, 0, pad.Length)
 
     let convert () =

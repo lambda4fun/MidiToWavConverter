@@ -11,9 +11,21 @@ module String =
     let split (separators : char[]) (s : string) = s.Split separators
 
 module File =
-    let existsInPath fileName =
+    let getFullPathIfExistsInPath fileName =
         System.Environment.GetEnvironmentVariable "PATH"
         |> String.split [|':'; ';'|]
-        |> Seq.exists ^ fun path ->
-            Path.Combine (path, fileName)
-            |> File.Exists
+        |> Seq.tryPick ^ fun path ->
+            let fullPath = Path.Combine (path, fileName)
+            if File.Exists fullPath then
+                Some fullPath
+            else
+                None
+
+    let existsInPath = getFullPathIfExistsInPath >> Option.isSome
+
+module Path =
+    let getFullPath fileName =
+        if File.Exists fileName then
+            Some ^ Path.GetFullPath fileName
+        else
+            File.getFullPathIfExistsInPath fileName

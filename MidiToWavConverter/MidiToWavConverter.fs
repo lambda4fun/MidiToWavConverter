@@ -45,7 +45,7 @@ type OptionsDialog () as this =
     let hintLabel = new Label (Text = "You can specify a command in PATH, an absolute path, or\r\na path relative to the working directory.")
 
     let ok () =
-        Options( ).TimidityCommand <- openFileField.Path |> Option.defaultValue ""
+        Options().TimidityCommand <- openFileField.Path |> Option.defaultValue ""
         this.Result <- DialogResult.Ok
         this.Close ()
 

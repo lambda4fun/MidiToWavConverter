@@ -85,7 +85,7 @@ type MainForm () as this =
                 failwith "Please enter a Timidity command in Options dialog."
 
             if not ^ File.Exists timidityCommand && not ^ File.existsInPath timidityCommand then
-                failwithf """Timidity command "%s" not found. Check the path in Options dialog."""
+                failwithf """Command "%s" not found. Check the path in Options dialog."""
                           timidityCommand
 
             let midiPath = inputFileField.Path |> Option.defaultValue ""

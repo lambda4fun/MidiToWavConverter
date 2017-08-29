@@ -163,10 +163,10 @@ type MainForm () as this =
             else
                 true
         |> Option.iter ^ fun (timidityCommand, midiPath, wavPath) ->
-            try
-                convertMidiToWave timidityCommand midiPath wavPath
-            with e ->
-                MessageBox.Show (this, e.Message, "Error", MessageBoxType.Error) |> ignore
+            match convertMidiToWave timidityCommand midiPath wavPath with
+            | Ok _ -> ()
+            | Error msg ->
+                MessageBox.Show (this, msg, "Error", MessageBoxType.Error) |> ignore
 
     let bottomRow =
         let buttonImagePosition = ButtonImagePosition.Above

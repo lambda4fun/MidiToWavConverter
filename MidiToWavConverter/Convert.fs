@@ -11,6 +11,7 @@ let convertMidiToWave timidityCommand midiPath wavePath =
     p.StartInfo.Arguments <- args
     p.StartInfo.UseShellExecute <- false
     p.StartInfo.RedirectStandardError <- true
+    p.StartInfo.CreateNoWindow <- true
 
     try
         p.Start () |> ignore

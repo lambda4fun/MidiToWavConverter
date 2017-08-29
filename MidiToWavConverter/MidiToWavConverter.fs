@@ -35,7 +35,7 @@ type PathField (labelText) as this =
     do
         this.Content <- new TableLayout (TableRow (TableCell label),
                                          TableRow (TableCell (textBox, scaleWidth = true), TableCell browseButton),
-                                         Spacing = Size (8, 2))
+                                         Spacing = Size (8, 6))
 
     member __.Path
         with get () =
@@ -185,7 +185,7 @@ type MainForm () as this =
         new TableLayout (TableRow [TableCell optionsButton; TableCell (new Panel (), scaleWidth = true); TableCell convertButton])
 
     do
-        let layout = new TableLayout (Spacing = Size (8, 8), Padding = Padding 16)
+        let layout = new TableLayout (Spacing = Size (12, 12), Padding = Padding 16)
         layout.Rows.Add ^ TableRow [TableCell inputFileField]
         layout.Rows.Add ^ TableRow [TableCell outputFolderField]
         layout.Rows.Add ^ TableRow (ScaleHeight = true)

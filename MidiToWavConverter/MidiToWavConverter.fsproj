@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Utilities.fs" />
+    <Compile Include="EtoUtilities.fs" />
     <Compile Include="Convert.fs" />
     <Compile Include="MidiToWavConverter.fs" />
     <None Include="App.config" />

@@ -28,9 +28,9 @@ type OptionsDialog () as this =
         new OpenFileField ("Timidity Command",
                            filters,
                            Path = Some ^ Options().TimidityCommand,
-                           Width = 480)
+                           Width = 320)
 
-    let hintLabel = new Label (Text = "You can specify a command in PATH, an absolute path, or a path relative to this program.")
+    let hintLabel = new Label (Text = "You can specify a command in PATH, an absolute path, or\r\na path relative to the working directory.")
 
     let ok () =
         Options( ).TimidityCommand <- openFileField.Path |> Option.defaultValue ""

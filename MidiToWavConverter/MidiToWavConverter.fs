@@ -134,14 +134,14 @@ type MainForm () as this =
             // TODO: Use monad
             // TODO: Use record
             let mutable timidityCommand = Options().TimidityCommand
-            if isSpacesOrEmpty timidityCommand then failwith "Please enter a Timidity command in Options dialog."
+            if String.isEmptyOrSpaces timidityCommand then failwith "Please enter a Timidity command in Options dialog."
 
             let midiPath = inputFileField.Path |> Option.defaultValue ""
-            if isSpacesOrEmpty midiPath then failwith "Please enter input file."
+            if String.isEmptyOrSpaces midiPath then failwith "Please enter input file."
             if not ^ File.Exists midiPath then failwith "Input file does not exist."
 
             let outputFolder = outputFolderField.Path |> Option.defaultValue ""
-            if isSpacesOrEmpty outputFolder then failwith "Please enter output folder."
+            if String.isEmptyOrSpaces outputFolder then failwith "Please enter output folder."
             if not ^ Directory.Exists outputFolder then failwith "Output folder does not exist."
 
             let wavFileName = Path.ChangeExtension (Path.GetFileName(midiPath), "wav")

@@ -46,6 +46,9 @@
     <None Include="App.config" />
     <EmbeddedResource Include="../resources/options.png" />
     <EmbeddedResource Include="../resources/convert.png" />
+    <None Include="../LICENSE.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="../packages/Eto.Platform.Gtk/lib/net45/Eto.Gtk2.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

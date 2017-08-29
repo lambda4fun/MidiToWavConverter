@@ -149,7 +149,7 @@ type MainForm () as this =
 
             Some (timidityCommand, midiPath, wavPath)
         with e ->
-            MessageBox.Show (e.Message, "Error", MessageBoxType.Error) |> ignore
+            MessageBox.Show (this, e.Message, "Error", MessageBoxType.Error) |> ignore
             None
 
     let convert () =
@@ -157,7 +157,7 @@ type MainForm () as this =
         |> Option.filter ^ fun (_, _, wavPath) ->
             if File.Exists wavPath then
                 let message = sprintf """A file named "%s" already exists. The file will be replaced/overwritten.""" ^ Path.GetFileName wavPath
-                match MessageBox.Show (message, this.Title, MessageBoxButtons.OKCancel, MessageBoxType.Question) with
+                match MessageBox.Show (this, message, this.Title, MessageBoxButtons.OKCancel, MessageBoxType.Question) with
                 | DialogResult.Ok -> true
                 | _ -> false
             else
@@ -166,7 +166,7 @@ type MainForm () as this =
             try
                 convertMidiToWave timidityCommand midiPath wavPath
             with e ->
-                MessageBox.Show (e.Message, "Error", MessageBoxType.Error) |> ignore
+                MessageBox.Show (this, e.Message, "Error", MessageBoxType.Error) |> ignore
 
     let bottomRow =
         let buttonImagePosition = ButtonImagePosition.Above

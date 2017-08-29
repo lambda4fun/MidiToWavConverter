@@ -9,7 +9,7 @@ let convertMidiToWave timidityCommand midiPath wavePath =
     match Path.getFullPath timidityCommand with
     | None ->
         Error "Could'nt get the full path of timidity"
-    | Some timidityFullPath ->
+    | Some timidityCommand ->
         let args = sprintf """-Ow --output-16bit --output-stereo --output-file="%s" "%s" """
                            wavePath midiPath
         use p = new Process ()

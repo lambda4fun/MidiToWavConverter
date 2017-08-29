@@ -19,11 +19,14 @@ type Options () =
             config.AppSettings.Settings.["TimidityCommand"].Value <- x
             config.Save ()
 
-    member __.WaveFileAlignment
+    member this.WaveFileAlignment
         with get () =
             match Int64.TryParse config.AppSettings.Settings.["WaveFileAlignment"].Value with
             | (true, x) -> x
-            | _         -> 32000L // default value
+            | _         ->
+                let defaultValue = 32000L
+                this.WaveFileAlignment <- defaultValue
+                defaultValue
         and  set (x : int64) =
             config.AppSettings.Settings.["WaveFileAlignment"].Value <- string x
             config.Save ()

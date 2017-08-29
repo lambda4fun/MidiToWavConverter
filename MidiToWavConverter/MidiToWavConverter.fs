@@ -144,6 +144,8 @@ type MainForm () as this =
         layout.Rows.Add ^ TableRow [TableCell bottomRow]
         this.Content <- layout
 
+        outputFolderField.Path <- Some ^ Environment.GetFolderPath (Environment.SpecialFolder.Desktop)
+
 [<EntryPoint; STAThread>]
 let main _ =
     let app = new Application (Eto.Platform.Detect)

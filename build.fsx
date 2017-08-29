@@ -15,7 +15,7 @@ let appReferences  =
 
 // Application info
 let appName = "MidiToWavConverter"
-let version = "0.1"
+let version = "0.1.0"
 
 // Targets
 Target "Clean" (fun _ ->

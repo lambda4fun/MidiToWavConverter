@@ -19,6 +19,15 @@ type Options () =
             config.AppSettings.Settings.["TimidityCommand"].Value <- x
             config.Save ()
 
+    member __.WaveFileAlignment
+        with get () =
+            match Int64.TryParse config.AppSettings.Settings.["WaveFileAlignment"].Value with
+            | (true, x) -> x
+            | _         -> 32000L // default value
+        and  set (x : int64) =
+            config.AppSettings.Settings.["WaveFileAlignment"].Value <- string x
+            config.Save ()
+
 type OptionsDialog () as this =
     inherit Dialog<DialogResult> (Title = "Options")
 
@@ -123,7 +132,7 @@ type MainForm () as this =
         |> Option.iter ^ fun (timidityCommand, midiPath, wavPath) ->
             match convertMidiToWave timidityCommand midiPath wavPath with
             | Ok _ ->
-                padFileToAlignment 32000L wavPath
+                padFileToAlignment (Options().WaveFileAlignment) wavPath
             | Error msg ->
                 MessageBox.Show (this, msg, "Error", MessageBoxType.Error) |> ignore
 

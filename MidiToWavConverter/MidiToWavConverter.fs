@@ -80,8 +80,13 @@ type MainForm () as this =
         try
             // TODO: Use monad
             // TODO: Use record
-            let mutable timidityCommand = Options().TimidityCommand
-            if String.isEmptyOrSpaces timidityCommand then failwith "Please enter a Timidity command in Options dialog."
+            let timidityCommand = Options().TimidityCommand
+            if String.isEmptyOrSpaces timidityCommand then
+                failwith "Please enter a Timidity command in Options dialog."
+
+            if not ^ File.Exists timidityCommand && not ^ File.existsInPath timidityCommand then
+                failwithf """Timidity command "%s" not found. Check the path in Options dialog."""
+                          timidityCommand
 
             let midiPath = inputFileField.Path |> Option.defaultValue ""
             if String.isEmptyOrSpaces midiPath then failwith "Please enter input file."

@@ -104,6 +104,15 @@ type MainForm () as this =
             MessageBox.Show (this, e.Message, "Error", MessageBoxType.Error) |> ignore
             None
 
+    let padFileToAlignment (alignment : int64) (filePath : string) =
+        let ceil n = n + (alignment - n % alignment)
+        let fileInfo = FileInfo filePath
+        let newFileSize = ceil fileInfo.Length
+        let padSize = newFileSize - fileInfo.Length
+        let pad = Array.zeroCreate ^ int padSize
+        use file = File.Open (filePath, FileMode.Append)
+        file.Write (pad, 0, pad.Length)
+
     let convert () =
         getConvertParams ()
         |> Option.filter ^ fun (_, _, wavPath) ->
@@ -116,7 +125,8 @@ type MainForm () as this =
                 true
         |> Option.iter ^ fun (timidityCommand, midiPath, wavPath) ->
             match convertMidiToWave timidityCommand midiPath wavPath with
-            | Ok _ -> ()
+            | Ok _ ->
+                padFileToAlignment 32000L wavPath
             | Error msg ->
                 MessageBox.Show (this, msg, "Error", MessageBoxType.Error) |> ignore
 
